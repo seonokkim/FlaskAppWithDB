@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-3">
+    <!-- Form Title -->
+    <h5 class="my-3 border-bottom pb-2">Create a New Question</h5>
+    
+    <!-- Display Form Errors -->
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field, errors in form.errors.items() %}
+            <strong>{{ form[field].label }}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Question Form -->
+    <form method="post" class="my-3">
+        {{ form.csrf_token }}
+
+        <!-- Subject Field -->
+        <div class="mb-3">
+            {{ form.subject.label(class="form-label") }}
+            {{ form.subject(class="form-control") }}
+        </div>
+
+        <!-- Content Field -->
+        <div class="mb-3">
+            {{ form.content.label(class="form-label") }}
+            {{ form.content(class="form-control") }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save Question</button>
+    </form>
+</div>
+{% endblock %}
